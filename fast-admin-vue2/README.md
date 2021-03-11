@@ -1,4 +1,4 @@
-# fast-admin-vue
+# fast-admin-vue2
 
 ## Project setup
 ```
