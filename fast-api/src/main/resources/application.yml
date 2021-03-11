@@ -37,7 +37,7 @@ spring:
   #  resources:
   #    add-mappings: false
   application:
-    name: lc-admin
+    name: fast-api
 #  cloud:
 #    nacos:
 #      discovery:
