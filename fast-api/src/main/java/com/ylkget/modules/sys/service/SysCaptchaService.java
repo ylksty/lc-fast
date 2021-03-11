@@ -18,4 +18,6 @@ public interface SysCaptchaService extends IService<SysCaptchaEntity> {
      * 获取图片验证码
      */
     BufferedImage getCaptcha(String uuid);
+
+    boolean validate(String uuid, String captcha);
 }

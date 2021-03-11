@@ -1,5 +1,6 @@
 package com.ylkget.modules.sys.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.code.kaptcha.Producer;
 import com.ylkget.base.common.utils.DateUtils;
@@ -43,5 +44,22 @@ public class SysCaptchaServiceImpl extends ServiceImpl<SysCaptchaDao, SysCaptcha
         this.save(captchaEntity);
 
         return producer.createImage(code);
+    }
+
+    @Override
+    public boolean validate(String uuid, String captcha) {
+        SysCaptchaEntity captchaEntity = this.getOne(new QueryWrapper<SysCaptchaEntity>().eq("uuid", uuid));
+        if(captchaEntity == null){
+            return false;
+        }
+
+        //删除验证码
+        this.removeById(uuid);
+
+        if(captchaEntity.getCode().equalsIgnoreCase(captcha) && captchaEntity.getExpireTime().getTime() >= System.currentTimeMillis()){
+            return true;
+        }
+
+        return false;
     }
 }
