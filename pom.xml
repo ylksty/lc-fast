@@ -11,6 +11,8 @@
     <description>lc-fast</description>
 
     <modules>
+        <module>fast-api</module>
+        <module>fast-common</module>
     </modules>
 
 </project>

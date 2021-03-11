@@ -1,13 +1,13 @@
-package com.ylkget.fastapi;
+package com.ylkget;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FastApiApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FastApiApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
