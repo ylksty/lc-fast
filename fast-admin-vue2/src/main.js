@@ -4,6 +4,8 @@ import router from './router'
 import store from '@/store'
 import VueCookie from 'vue-cookie'            // api: https://github.com/alfhen/vue-cookie
 import './plugins/element.js'
+import '@/element-ui'                         // api: https://github.com/ElemeFE/element
+import '@/assets/scss/index.scss'
 import httpRequest from './utils/httpRequest' // api: https://github.com/axios/axios
 import cloneDeep from 'lodash/cloneDeep'
 
