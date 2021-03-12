@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -58,9 +59,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
         return null;
     }
 
+    // sys_user_role left join sys_role_menu 获得用户所有角色下，所有目录+菜单+按钮的menue_id
     @Override
     public List<Long> queryAllMenuId(Long userId) {
-        return null;
+        return baseMapper.queryAllMenuId(userId);
     }
 
     @Override
@@ -86,13 +88,25 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
     }
 
     @Override
+    @Transactional
     public void update(SysUserEntity user) {
+        if(StringUtils.isBlank(user.getPassword())){
+            user.setPassword(null);
+        }else{
+            user.setPassword(new Sha256Hash(user.getPassword(), user.getSalt()).toHex());
+        }
+        this.updateById(user);
 
+        //检查角色是否越权
+        checkRole(user);
+
+        //保存用户与角色关系
+        sysUserRoleService.saveOrUpdate(user.getUserId(), user.getRoleIdList());
     }
 
     @Override
     public void deleteBatch(Long[] userIds) {
-
+        this.removeByIds(Arrays.asList(userIds));
     }
 
     @Override

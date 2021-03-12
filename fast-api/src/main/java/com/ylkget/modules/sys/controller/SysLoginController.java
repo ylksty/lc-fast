@@ -80,4 +80,13 @@ public class SysLoginController extends AbstractController {
         R r = sysUserTokenService.createToken(user.getUserId());
         return r;
     }
+
+    /**
+     * 退出
+     */
+    @PostMapping("/sys/logout")
+    public R logout() {
+        sysUserTokenService.logout(getUserId());
+        return R.ok();
+    }
 }

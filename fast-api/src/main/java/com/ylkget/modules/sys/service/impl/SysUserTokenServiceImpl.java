@@ -64,6 +64,13 @@ public class SysUserTokenServiceImpl extends ServiceImpl<SysUserTokenDao, SysUse
 
     @Override
     public void logout(long userId) {
+        //生成一个token
+        String token = TokenGenerator.generateValue();
 
+        //修改token
+        SysUserTokenEntity tokenEntity = new SysUserTokenEntity();
+        tokenEntity.setUserId(userId);
+        tokenEntity.setToken(token);
+        this.updateById(tokenEntity);
     }
 }

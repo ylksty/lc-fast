@@ -1,3 +1,6 @@
+## pits
+* svg不显示
+
 # fast-admin-vue2
 
 ## Project setup

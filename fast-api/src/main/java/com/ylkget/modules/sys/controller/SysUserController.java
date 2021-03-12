@@ -2,16 +2,20 @@ package com.ylkget.modules.sys.controller;
 
 import com.ylkget.base.common.utils.R;
 import com.ylkget.base.common.validator.ValidatorUtils;
+import com.ylkget.base.common.validator.group.UpdateGroup;
 import com.ylkget.common.annotation.SysLog;
 import com.ylkget.common.utils.Constant;
 import com.ylkget.common.utils.PageUtils;
 import com.ylkget.base.common.validator.group.AddGroup;
 import com.ylkget.modules.sys.entity.SysUserEntity;
+import com.ylkget.modules.sys.service.SysUserRoleService;
 import com.ylkget.modules.sys.service.SysUserService;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,6 +30,9 @@ import java.util.Map;
 public class SysUserController extends AbstractController {
     @Autowired
     private SysUserService sysUserService;
+    @Autowired
+    private SysUserRoleService sysUserRoleService;
+
     /**
      * 所有用户列表
      */
@@ -50,6 +57,21 @@ public class SysUserController extends AbstractController {
     }
 
     /**
+     * 用户信息
+     */
+    @GetMapping("/info/{userId}")
+    @RequiresPermissions("sys:user:info")
+    public R info(@PathVariable("userId") Long userId){
+        SysUserEntity user = sysUserService.getById(userId);
+
+        //获取用户所属的角色列表
+        List<Long> roleIdList = sysUserRoleService.queryRoleIdList(userId);
+        user.setRoleIdList(roleIdList);
+
+        return R.ok().put("user", user);
+    }
+
+    /**
      * 保存用户
      */
     @SysLog("保存用户")
@@ -60,6 +82,41 @@ public class SysUserController extends AbstractController {
 
         user.setCreateUserId(getUserId());
         sysUserService.saveUser(user);
+
+        return R.ok();
+    }
+
+    /**
+     * 修改用户
+     */
+    @SysLog("修改用户")
+    @PostMapping("/update")
+    @RequiresPermissions("sys:user:update")
+    public R update(@RequestBody SysUserEntity user){
+        ValidatorUtils.validateEntity(user, UpdateGroup.class);
+
+        user.setCreateUserId(getUserId());
+        sysUserService.update(user);
+
+        return R.ok();
+    }
+
+    /**
+     * 删除用户
+     */
+    @SysLog("删除用户")
+    @PostMapping("/delete")
+    @RequiresPermissions("sys:user:delete")
+    public R delete(@RequestBody Long[] userIds){
+        if(ArrayUtils.contains(userIds, 1L)){
+            return R.error("系统管理员不能删除");
+        }
+
+        if(ArrayUtils.contains(userIds, getUserId())){
+            return R.error("当前用户不能删除");
+        }
+
+        sysUserService.deleteBatch(userIds);
 
         return R.ok();
     }

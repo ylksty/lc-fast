@@ -30,6 +30,7 @@ public class ShiroServiceImpl implements ShiroService {
     @Autowired
     private SysUserTokenDao sysUserTokenDao;
 
+    // 获得用户所有角色，所有按钮的权限
     @Override
     public Set<String> getUserPermissions(long userId) {
         List<String> permsList;
