@@ -1,6 +1,6 @@
 package com.ylkget.modules.sys.oauth2;
 
-import com.ylkget.common.exception.FastException;
+import com.ylkget.base.common.exception.FastException;
 
 import java.security.MessageDigest;
 import java.util.UUID;

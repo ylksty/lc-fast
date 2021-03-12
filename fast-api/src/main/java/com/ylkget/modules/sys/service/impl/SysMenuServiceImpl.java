@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author joe 2021/3/11 19:41
  */
-@Service
+@Service("sysMenuService")
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity> implements SysMenuService {
     @Autowired
     private SysUserService sysUserService;
@@ -45,6 +45,11 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity> i
     }
 
     @Override
+    public List<SysMenuEntity> queryNotButtonList() {
+        return null;
+    }
+
+    @Override
     public List<SysMenuEntity> getUserMenuList(Long userId) {
         //系统管理员，拥有最高权限
         if(userId == Constant.SUPER_ADMIN){
@@ -54,6 +59,11 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity> i
         //用户菜单列表
         List<Long> menuIdList = sysUserService.queryAllMenuId(userId);
         return getAllMenuList(menuIdList);
+    }
+
+    @Override
+    public void delete(Long menuId) {
+
     }
 
     /**

@@ -34,7 +34,6 @@ const mainRoutes = {
     // { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } }
   ],
   beforeEnter (to, from, next) {
-    console.log(222)
     let token = Vue.cookie.get('token')
     if (!token || !/\S/.test(token)) {
       clearLoginInfo()
@@ -124,7 +123,6 @@ function fnAddDynamicMenuRoutes (menuList = [], routes = []) {
         route['name'] = `i-${menuList[i].menuId}`
         route['meta']['iframeUrl'] = menuList[i].url
       } else {
-        
         try {
           route['component'] = _import(`modules/${menuList[i].url}`) || null
         } catch(e) {

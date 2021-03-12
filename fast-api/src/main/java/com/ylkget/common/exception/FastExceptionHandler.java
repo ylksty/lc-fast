@@ -1,5 +1,6 @@
 package com.ylkget.common.exception;
 
+import com.ylkget.base.common.exception.FastException;
 import com.ylkget.base.common.utils.R;
 import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;

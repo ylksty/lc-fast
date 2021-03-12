@@ -8,7 +8,7 @@
 
 package com.ylkget.common.xss;
 
-import com.ylkget.common.exception.FastException;
+import com.ylkget.base.common.exception.FastException;
 import org.apache.commons.lang.StringUtils;
 
 /**

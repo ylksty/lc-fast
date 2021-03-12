@@ -14,7 +14,6 @@
 
     <properties>
         <joda.time.version>2.10.10</joda.time.version>
-        <mybatisplus.version>3.4.2</mybatisplus.version>
     </properties>
 
     <dependencies>
@@ -32,6 +31,11 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+
         <!--Date and time library to replace JDK date handling-->
         <dependency>
             <groupId>joda-time</groupId>
@@ -45,17 +49,6 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.75</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatisplus.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.baomidou</groupId>
-                    <artifactId>mybatis-plus-generator</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
     </dependencies>

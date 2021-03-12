@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.code.kaptcha.Producer;
 import com.ylkget.base.common.utils.DateUtils;
-import com.ylkget.common.exception.FastException;
+import com.ylkget.base.common.exception.FastException;
 import com.ylkget.modules.sys.dao.SysCaptchaDao;
 import com.ylkget.modules.sys.entity.SysCaptchaEntity;
 import com.ylkget.modules.sys.service.SysCaptchaService;
