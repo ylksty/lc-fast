@@ -11,8 +11,9 @@
     <description>lc-fast</description>
 
     <modules>
-        <module>fast-api</module>
         <module>fast-common</module>
+        <module>fast-admin</module>
+        <module>fast-wx</module>
     </modules>
 
 </project>
